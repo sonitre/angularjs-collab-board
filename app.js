@@ -1,10 +1,14 @@
 var express = require('express'),
 	app = express(),
 	server = require('http').createServer(app),
-	io = require('socket.io').listen(server);
+	io = require('socket.io').listen(server),
+	path = require('path');
+
+var indexHtmlPath = path.join(__dirname, '../index.html');
 
 app.configure(function() {
     app.use(express.static(__dirname + '/public'));
+    app.use(express.static(indexHtmlPath));
 });
 
 io.sockets.on('connection', function(socket) {
